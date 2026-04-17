@@ -4,7 +4,7 @@ ShopSell = function(input,output){
   S3 = as.numeric(input$ShopS3);  if(is.na(S3)){ S3 = 0 }
   S4 = as.numeric(input$ShopS4);  if(is.na(S4)){ S4 = 0 }
   S5 = as.numeric(input$ShopS5);  if(is.na(S5)){ S5 = 0 }
-  n = 1000;  X = Y = 1:n;  S = S1 * (S2 - S3 * (X-1)) / S2;  S = (S + abs(S)) / 2
+  n = 1000;  X = Y = 1:n;  S = S1 * (S2 - S3 * (X-1));  S = (S + abs(S)) / 2
   for(i in 1:length(Y)){ Y[i] = (S4 %/% i) * sum(S[1:i]);  if(S4 %% i > 0){ Y[i] = Y[i] + sum(S[1:(S4 %% i)]) } }
   output$ShopPlot = renderPlot({ plot(X,Y,type="l",xlab = "Sold per World",ylab = "GP Earned") })
   hopval = function(hop){ if(hop<=0){ return(0) };  A = S4 %/% hop;  B = S4 %% hop;  return(hop*sum(S[1:A]) + B*S[A+1]) }
